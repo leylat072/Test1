@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic; 		
+using System.Linq;
+using System.Collections;
+public class Program
+{
+	public static void Main()
+	{
+		var dictionary = new Dictionary<int, int>();
+
+		int[] T = {1,1,1,1,1,4,4,4,9,9};
+		int value;
+		for(int i = 0 ; i< T.Length ; i ++ )
+		{
+			value =0;
+			if(dictionary.TryGetValue( T[i], out value))
+			{
+				dictionary[T[i]] = value +1;
+				
+					}
+			else
+			{
+				dictionary.Add(T[i], 1);			
+			}
+		
+		}
+		Console.WriteLine(dictionary);
+		foreach(KeyValuePair<int, int> entry in dictionary)
+		{
+			 // do something with entry.Value or entry.Key
+			Console.WriteLine(entry.Key);
+			}
+		//var dictionary1 = dictionary.OrderBy(key => key.value);
+		 List<KeyValuePair<int, int>> sorted = (from kv in dictionary orderby kv.Value select kv).ToList();
+		int half = T.Length /2;
+		int j =0 ;
+		int sum =0;
+		ArrayList h = new ArrayList();
+		foreach(KeyValuePair<int, int> entry in sorted)
+		{
+			j = entry.Value - 1 + sum;
+			 if(j  < half)
+			 {
+				  sum = entry.Value - 1 + sum;
+				 h.Add(entry.Key);
+				 
+				 
+			 }
+			  if(sum > half) 
+			  {
+				 h.Add(entry.Key); 
+			  }
+			  
+		}
+		Console.WriteLine("------------");
+		foreach(object m in h)
+		{
+				Console.WriteLine(m);
+		}
+		
+{
+    // do something with entry.Value or entry.Key
+}
+	}
+}
